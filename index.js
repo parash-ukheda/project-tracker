@@ -34,7 +34,7 @@ io.on('connection',(socket) => {
 
 // middleware
 app.use(cors({
-    origin:'http://localhost:3000',
+    origin:'*',
     credentials:true
 }));
 app.use(express.json());
@@ -47,7 +47,7 @@ app.use('/api/user/',user_routes);
 app.use('/api/project/',project_routes);
 app.use('/api/task/',task_routes);
 app.use('/api/comment/',comment_routes);
-app.use('/api/document/',document_routes);
+app.use('/api/document/',document_routes)
 
 server.listen(port, '0.0.0.0', () => {
     console.log(`Server is listening at port : ${port}`)
