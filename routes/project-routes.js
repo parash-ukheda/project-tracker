@@ -21,6 +21,6 @@ project_routes.post('/',authenTication,AuthorizeRole('Admin' || 'Superadmin'),[
 project_routes.get('/all',authenTication,getAllProject);
 project_routes.get('/:id',authenTication,getProjectFun);
 project_routes.put('/:id',authenTication,updateProject);
-project_routes.delete('/:id',authenTication,deleteProject)
+project_routes.delete('/:id',authenTication,deleteProject);
 
 module.exports = project_routes;

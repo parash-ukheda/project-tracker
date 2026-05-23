@@ -6,9 +6,9 @@ const dataBaseConnect = async(url) => {
         console.log('Database Connected')
     } catch (error) {
         // console.log('error',error).exit(1);
-        console.log('Database Disconnected')
+        console.log('Database Disconnected',error.message)
     }
-};
+}
 
 module.exports = {
     dataBaseConnect
