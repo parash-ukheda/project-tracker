@@ -19,10 +19,10 @@ const userSchema = new mongoose.Schema({
         enum:["Admin","Superadmin","Manager","Member","Client"],
         required:true
     },
-    // userImg:{
-    //     type:String,
-    //     required:false
-    // },
+    userImg:{
+        type:String,
+        required:false
+    },
     status: {
         type:String,
         enum:["Active","Inactive"],

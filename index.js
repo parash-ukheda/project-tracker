@@ -21,8 +21,7 @@ const port = process.env.PORT;
 const io = initSocket(server) 
 const mainRoot = "/app/"
 // Database
-const mongourl = process.env.MONGO_URL
-console.log('mongourl',mongourl)
+const mongourl = process.env.MONGO_URL;
 dataBaseConnect(mongourl);
 
 // socket
