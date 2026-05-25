@@ -2,15 +2,22 @@ const { validationResult } = require("express-validator");
 const User = require("../schema/user-schema");
 const bcrypt = require('bcrypt');
 const { matchPassword, tokenCreate } = require("../middleware/service-middleware");
-
+const cloudinary = require('../middleware/service-middleware')
 const AuthRegister = async(req,res) => {
   console.log('createUser',11)
       try {
         const { fullName, email, password, role, status } = req.body;
-        console.log('reqFile',fullName,req.file)
+        console.log('reqFile',fullName,req.file);
+
         if(!email || !email.endsWith('@aispl.co')) {
           return res.status(403).json({status:"Failed",message:"Registration is restricted to authorized aispl.co email addresses."})
-        }
+        };
+        const uploadResult = await cloudinary.uploader.upload(
+          req.file.path,
+          {
+            folder: 'users'
+          }
+        );
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
           return res.status(400).json({ errors: errors.array() });
@@ -28,7 +35,7 @@ const AuthRegister = async(req,res) => {
           fullName,
           email,
           role,
-          userImg:`/upload/${req["file"].filename}`,
+          userImg:uploadResult.secure_url,
           password: hashPassword,
           status,
         });

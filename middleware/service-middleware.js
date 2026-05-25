@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const multer = require('multer');
 const path = require('node:path');
+const cloudinary = require('cloudinary').v2;
 
 const storage = multer.diskStorage({
   destination:function(req,file,cb) {
@@ -14,6 +15,13 @@ const storage = multer.diskStorage({
     req["file"] = file;
      cb(null, safeName);
   }
+})
+
+cloudinary.config({
+  cloud_name:process.env.CLOUD_NAME,
+  api_key : process.env.API_KEY,
+  api_secret:process.env.API_SECRET,
+  secure:true
 })
 
 const tokenCreate = async (payload) => {
@@ -37,11 +45,12 @@ const AuthorizeRole = (allowedRoles) => {
     next();
   }
 };
-const upload = multer({storage:storage})
+const upload =  multer({storage:storage})
 
 module.exports = {
   tokenCreate,
   matchPassword,
   AuthorizeRole,
+  cloudinary,
   upload
 };
