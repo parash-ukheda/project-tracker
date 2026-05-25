@@ -18,6 +18,7 @@ const AuthRegister = async(req,res) => {
             folder: 'users'
           }
         );
+        console.log('uploadResult',uploadResult)
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
           return res.status(400).json({ errors: errors.array() });

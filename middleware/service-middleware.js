@@ -17,12 +17,7 @@ const storage = multer.diskStorage({
   }
 })
 
-cloudinary.config({
-  cloud_name:process.env.CLOUD_NAME,
-  api_key : process.env.API_KEY,
-  api_secret:process.env.API_SECRET,
-  secure:true
-})
+
 
 const tokenCreate = async (payload) => {
   const token = await jwt.sign(payload, process.env.SECRET_KEY, {
@@ -46,7 +41,12 @@ const AuthorizeRole = (allowedRoles) => {
   }
 };
 const upload =  multer({storage:storage})
-
+cloudinary.config({
+  cloud_name:process.env.CLOUD_NAME,
+  api_key : process.env.API_KEY,
+  api_secret:process.env.API_SECRET,
+  secure:true
+})
 module.exports = {
   tokenCreate,
   matchPassword,
