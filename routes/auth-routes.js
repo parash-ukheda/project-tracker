@@ -4,6 +4,7 @@ const { authenTication } = require('../middleware/auth.middleware');
 const { upload } = require('../middleware/service-middleware');
 
 const auth_routes = express();
+console.log('reg',1)
 auth_routes.post('/register',upload.single('fileUrl'),AuthRegister);
 auth_routes.post('/login',AuthLogin);
 auth_routes.get('/me',authenTication,AuthMe);
