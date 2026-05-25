@@ -9,6 +9,7 @@ const storage = multer.diskStorage({
   },
   filename:function(req,file,cb) {
      const safeName = file.originalname.replace(/\s+/g, '-');
+     console.log('safeName',safeName,file)
     // console.log('ddddddddddd',file,req.file);
     req["file"] = file;
      cb(null, safeName);
