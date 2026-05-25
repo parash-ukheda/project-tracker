@@ -11,6 +11,7 @@ const {
 const createUser = async (req, res) => {
   try {
     const { fullName, email, password, role, status } = req.body;
+    console.log('14',fullName)
        if(!email || !email.endsWith('@aispl.co')) {
           return res.status(403).json({status:"Failed",message:"Registration is restricted to authorized aispl.co email addresses."})
         }

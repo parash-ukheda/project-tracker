@@ -7,7 +7,7 @@ const AuthRegister = async(req,res) => {
   console.log('createUser',11)
       try {
         const { fullName, email, password, role, status } = req.body;
-        console.log('reqFile',req.file)
+        console.log('reqFile',fullName,req.file)
         if(!email || !email.endsWith('@aispl.co')) {
           return res.status(403).json({status:"Failed",message:"Registration is restricted to authorized aispl.co email addresses."})
         }
@@ -32,6 +32,8 @@ const AuthRegister = async(req,res) => {
           password: hashPassword,
           status,
         });
+
+        console.log('newUser',newUser)
     
         return res
           .status(201)
