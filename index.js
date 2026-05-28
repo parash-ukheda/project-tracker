@@ -22,6 +22,7 @@ const io = initSocket(server)
 const mainRoot = "/app/"
 // Database
 const mongourl = process.env.MONGO_URL;
+console.log('mongourl',mongourl)
 dataBaseConnect(mongourl);
 
 // socket
@@ -33,10 +34,11 @@ io.on('connection',(socket) => {
 })
 
 // middleware
-app.use(cors({
-    origin:'*',
-    credentials:true
-}));
+// {
+//     origin:'http://localhost:3000',
+//     credentials:true
+// }
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use('/upload', express.static(path.join(__dirname , 'upload')));

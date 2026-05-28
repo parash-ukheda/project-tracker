@@ -32,6 +32,7 @@ const createUser = async (req, res) => {
       fullName,
       email,
       password: hashPassword,
+      userImg:`/upload/${req.file.originalname}`,
       role,
       status,
     });

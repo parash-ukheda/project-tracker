@@ -2,7 +2,7 @@ const express = require('express');
 const { createUser, getAllUser, updateUser, deleteUser, getSingleUser ,  } = require('../controller/user-controller');
 const { body } = require('express-validator');
 const { authenTication } = require('../middleware/auth.middleware');
-const { AuthorizeRole } = require('../middleware/service-middleware');
+const { AuthorizeRole, upload } = require('../middleware/service-middleware');
 
 const user_routes = express.Router();
 user_routes.post('/create',authenTication,AuthorizeRole('Admin' || 'Superadmin'),[
@@ -11,7 +11,7 @@ user_routes.post('/create',authenTication,AuthorizeRole('Admin' || 'Superadmin')
     body('password').notEmpty().withMessage('Password is required'),
     body('role').notEmpty().withMessage('Role is required'),
     body('status').notEmpty().withMessage('Status is required')
-],createUser);
+],upload.single('fileUrl'),createUser);
 
 user_routes.get('/all',authenTication,getAllUser);
 user_routes.put('/update/:id',authenTication,AuthorizeRole('Admin' || 'Superadmin'),updateUser);

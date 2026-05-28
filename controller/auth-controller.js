@@ -7,18 +7,17 @@ const AuthRegister = async(req,res) => {
   console.log('createUser',11)
       try {
         const { fullName, email, password, role, status } = req.body;
-        console.log('reqFile',fullName,req.file);
-
+        console.log('fff',req.file)
         if(!email || !email.endsWith('@aispl.co')) {
           return res.status(403).json({status:"Failed",message:"Registration is restricted to authorized aispl.co email addresses."})
         };
-        const uploadResult = await cloudinary.uploader.upload(
-          req.file.path,
-          {
-            folder: 'users'
-          }
-        );
-        console.log('uploadResult',uploadResult)
+        // const uploadResult = await cloudinary.uploader.upload(
+        //   req.file.path,
+        //   {
+        //     folder: 'users'
+        //   }
+        // );
+        // console.log('uploadResult',uploadResult)
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
           return res.status(400).json({ errors: errors.array() });
@@ -32,11 +31,12 @@ const AuthRegister = async(req,res) => {
           password,
           Number(process.env.SALT_ROUND),
         );
+        let handleurl = req?.file ? `/upload/${req?.file?.originalname}` :null
         const newUser = await User.create({
           fullName,
           email,
           role,
-          userImg:uploadResult.secure_url,
+          userImg:handleurl,
           password: hashPassword,
           status,
         });

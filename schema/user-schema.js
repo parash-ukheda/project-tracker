@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
     },
     userImg:{
         type:String,
-        required:true
+        required:false
     },
     status: {
         type:String,
